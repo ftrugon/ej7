@@ -4,7 +4,11 @@
  * @property numcuenta Número de cuenta único asociado a la cuenta.
  * @property saldodisp Saldo disponible en la cuenta.
  */
-class Cuenta(val numcuenta:String, var saldodisp:Double){
+class Cuenta(val numcuenta:String,  saldodisp:Double= 0.0){
+
+    var saldodisp: Double= saldodisp
+        private set
+
 
     /**
      * Consulta el saldo actual de la cuenta.
@@ -81,7 +85,7 @@ class Persona(private val dni:String, var listadecuentas:Array<Cuenta>){
         val cuentaorigen = listadecuentas.find { it.numcuenta == numcuentaorigen }
         val cuentadestino = personaB.listadecuentas.find { it.numcuenta == numcuentadestino }
 
-        if(cuentadestino != null && cuentaorigen!= null && cuentaorigen.saldodisp <= cuentaorigen.saldodisp ){
+        if(cuentadestino != null && cuentaorigen!= null && montoapasar <= cuentaorigen.saldodisp ){
             cuentaorigen.realizarpagos(montoapasar)
             cuentadestino.recibirabonos(montoapasar)
             println("Se ha realizado la transferencia")
